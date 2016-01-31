@@ -1,17 +1,15 @@
 (function() {
   function TitleShortcutListener(root, config) {
-    if (root instanceof Event) {
-      // Shortcut: addEventListener('keydown', TitleShortcutListener);
-      var keyEvent = root;
-      TitleShortcutListener.prototype.handleEvent(keyEvent);
-      return;
-    } else {
+    if (root !== undefined) {
       this.root = root;
-      Object.assign(this, config);
-      this._press = null;
-      this.root.addEventListener('keydown', this, false);
-      this.root.addEventListener('keypress', this, false);
+    } else {
+      this.root = document;
     }
+    Object.assign(this, config);
+    this._press = null;
+
+    this.root.addEventListener('keydown', this, false);
+    this.root.addEventListener('keypress', this, false);
   }
 
   Object.assign(TitleShortcutListener.prototype, {
