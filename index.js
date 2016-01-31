@@ -1,9 +1,9 @@
 ;(function() {
-  function TitleShortcutWatcher(root, options) {
+  function TitleShortcutListener(root, options) {
     if ('currentTarget' in root) {
-      // Shortcut: addEventLister('keydown', TitleShortcutWatcher, false);
+      // Shortcut: addEventListener('keydown', TitleShortcutListener, false);
       var keyEvent = root;
-      TitleShortcutWatcher.prototype.handleEvent(keyEvent);
+      TitleShortcutListener.prototype.handleEvent(keyEvent);
       return;
     }
 
@@ -17,9 +17,9 @@
     }
   }
 
-  TitleShortcutWatcher.prototype.eventName = 'keydown';
+  TitleShortcutListener.prototype.eventName = 'keydown';
 
-  TitleShortcutWatcher.prototype.keys = {
+  TitleShortcutListener.prototype.keys = {
     meta: 'META', ctrl: 'CTRL', alt: 'ALT', shift: 'SHIFT',
     13: 'ENTER', 27: 'ESC', 32: 'SPACE',
     8: 'BACKSPACE', 46: 'DELETE',
@@ -31,22 +31,22 @@
 
   // A-Z
   for (var c = 65; c <= 90; c++) {
-    TitleShortcutWatcher.prototype.keys[c] = String.fromCharCode(c);
+    TitleShortcutListener.prototype.keys[c] = String.fromCharCode(c);
   }
 
   // 0-9
   for (var n = 48; n <= 57; n++) {
-    TitleShortcutWatcher.prototype.keys[n] = String.fromCharCode(n);
+    TitleShortcutListener.prototype.keys[n] = String.fromCharCode(n);
   }
 
-  TitleShortcutWatcher.prototype.separator = '-';
+  TitleShortcutListener.prototype.separator = '-';
 
-  TitleShortcutWatcher.prototype.typeableElements = [
+  TitleShortcutListener.prototype.typeableElements = [
     'INPUT',
     'TEXTAREA'
   ];
 
-  TitleShortcutWatcher.prototype.clickableInputTypes = [
+  TitleShortcutListener.prototype.clickableInputTypes = [
     'radio',
     'checkbox',
     'button',
@@ -54,25 +54,25 @@
     'reset'
   ];
 
-  TitleShortcutWatcher.prototype.isTextInput = function(element) {
+  TitleShortcutListener.prototype.isTextInput = function(element) {
     var isTypeable = !!~this.typeableElements.indexOf(element.tagName);
     var isClickable = !!~this.clickableInputTypes.indexOf(element.type);
     return isTypeable && !isClickable;
   };
 
-  TitleShortcutWatcher.prototype.getQuery = function(shortcut) {
+  TitleShortcutListener.prototype.getQuery = function(shortcut) {
     return '[title$="[' + shortcut.toUpperCase() + ']"]';
   };
 
-  TitleShortcutWatcher.prototype.isVisible = function (element) {
+  TitleShortcutListener.prototype.isVisible = function (element) {
     return element.offsetWidth > 0 || element.offsetHeight > 0;
   };
 
-  TitleShortcutWatcher.prototype.isEnabled = function (element) {
+  TitleShortcutListener.prototype.isEnabled = function (element) {
     return !(element.disabled);
   };
 
-  TitleShortcutWatcher.prototype.handleEvent = function(e) {
+  TitleShortcutListener.prototype.handleEvent = function(e) {
     if (this.isTextInput(e.target)) return;
 
     key = this.keys[e.which];
@@ -94,7 +94,7 @@
     }
   };
 
-  TitleShortcutWatcher.prototype.callShortcut = function(target) {
+  TitleShortcutListener.prototype.callShortcut = function(target) {
     target.focus();
 
     if (target.tagName === 'A') {
@@ -108,14 +108,14 @@
     }
   };
 
-  TitleShortcutWatcher.prototype.remove = function() {
+  TitleShortcutListener.prototype.remove = function() {
     if (this.root) {
       this.root.removeEventListener(this.eventName, this, false);
     }
   };
 
-  window.TitleShortcutWatcher = TitleShortcutWatcher;
+  window.TitleShortcutListener = TitleShortcutListener;
   if (typeof module !== 'undefined') {
-    module.exports = TitleShortcutWatcher;
+    module.exports = TitleShortcutListener;
   }
 }());
