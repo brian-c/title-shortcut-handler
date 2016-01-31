@@ -1,5 +1,5 @@
 (function() {
-  function TitleShortcutListener(root, config) {
+  function TitleShortcutHandler(root, config) {
     if (root !== undefined) {
       this.root = root;
     } else {
@@ -12,7 +12,7 @@
     this.root.addEventListener('keypress', this, false);
   }
 
-  Object.assign(TitleShortcutListener.prototype, {
+  Object.assign(TitleShortcutHandler.prototype, {
     modifiers: [
       'META',
       'CTRL',
@@ -165,8 +165,8 @@
   });
 
   if (typeof module !== 'undefined') {
-    module.exports = TitleShortcutListener;
+    module.exports = TitleShortcutHandler;
   } else if (typeof window !== 'undefined') {
-    window.TitleShortcutListener = TitleShortcutListener;
+    window.TitleShortcutHandler = TitleShortcutHandler;
   }
 }());
