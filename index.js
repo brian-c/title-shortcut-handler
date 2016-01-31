@@ -24,6 +24,7 @@
 
     nonPrintingCharacters: {
       8: 'BACKSPACE',
+      9: 'TAB',
       13: 'ENTER',
       27: 'ESC',
       32: 'SPACE',
