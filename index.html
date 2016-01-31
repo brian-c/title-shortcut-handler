@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TitleShortcutListener</title>
+  </head>
+  <body>
+    <p>
+      <u>I</u>nput: <input type="text" title="[I]" /><br />
+      <u>N</u>umber: <input type="number" data-shortcut="N" /><br />
+    </p>
+
+    <p>
+      <input type="checkbox" title="[X]" /> Checkbo<u>x</u>
+    </p>
+
+    <p>
+      <input type="radio" name="station" title="[1]" /> Radio <u>1</u><br />
+      <input type="radio" name="station" title="[2]" /> Radio <u>2</u><br />
+      <input type="radio" name="station" title="[3]" /> Radio <u>3</u>
+    </p>
+
+    <a href="#some-hash" title="[L]"><u>L</u>ink</a>
+
+    <p>
+      <button type="button" onclick="alert('Cancel');" title="[ESC]">Cancel</button>
+      <button type="button" onclick="alert('Hello');" title="[SHIFT-ENTER]">Alert</button>
+    </p>
+
+    <script src="./index.js"></script>
+    <script>
+      window.titleShortcutListener = new TitleShortcutListener(document, {
+        log: true
+      });
+    </script>
+  </body>
+</html>
