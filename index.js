@@ -164,8 +164,9 @@
     }
   });
 
-  window.TitleShortcutListener = TitleShortcutListener;
   if (typeof module !== 'undefined') {
     module.exports = TitleShortcutListener;
+  } else if (typeof window !== 'undefined') {
+    window.TitleShortcutListener = TitleShortcutListener;
   }
 }());
